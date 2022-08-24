@@ -40,7 +40,8 @@ public class Desafio335 {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int casos, alturaPiramide, resultado, cont, resultadoF;//porque empieza en 3
+        long casos, alturaPiramide, resultado, cont, resultadoF;//porque empieza en 3
+
         casos = sc.nextInt();
 
         for (int i = 0; i < casos; i++) {
@@ -49,6 +50,8 @@ public class Desafio335 {
             resultadoF = 0;
 
             alturaPiramide = sc.nextInt();
+            if(alturaPiramide>Math.pow(10,8))
+                break;
             if(alturaPiramide == 1){
                 System.out.println("1");continue;
             }else if(alturaPiramide == 2){
