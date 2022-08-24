@@ -36,22 +36,25 @@ public class Desafio112 {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int casos, distancia, limiteVelocidad, tiempo;
-        double distanciaKm, tiempoS, x;
-        casos = sc.nextInt();
+        int casos, limiteVelocidad;
+        double distancia;
+        double tiempoS, x, tiempo, distanciaKm;
+        casos = sc.nextInt();//casos de prueba, lo indica el enunciado
         for (int i = 0; i < casos; i++) {
-            distancia = sc.nextInt();
+            distancia = sc.nextDouble();
             limiteVelocidad = sc.nextInt();
-            tiempo = sc.nextInt();
+            tiempoS = sc.nextDouble();
 
-            if(distancia==0 && limiteVelocidad == 0 && tiempo == 0)
+            if(distancia==0 && limiteVelocidad == 0 && tiempoS == 0)
                 break;
+            else if(distancia < 0 || limiteVelocidad<0 || tiempoS < 0)
+                System.out.println("ERROR");
             else{
                 distanciaKm = distancia/1000;//metros-->km
-                tiempoS = (tiempo/60)/60;//segundos-->horas
+                tiempo = ((tiempoS/60)/60);//segundos-->horas
                 x = distanciaKm/tiempo;
                 if(x>limiteVelocidad){
-                    if(x>limiteVelocidad+(limiteVelocidad*20)/100){
+                    if(x>limiteVelocidad+((limiteVelocidad*20)/100)){
                         System.out.println("PUNTOS");
                     }else{
                         System.out.println("MULTA");
