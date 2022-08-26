@@ -20,7 +20,7 @@ public class Desafio523 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int casos, matriculasModernas, matriculasAntiguas;
-        String matriculas, letrasMatriculaEdu, letrasMatriculas;
+        String matriculas;
 
         casos = sc.nextInt();
         sc.nextLine();
@@ -45,19 +45,17 @@ public class Desafio523 {
             matriculas = sc.nextLine();
 
             String matriculasCompletas[] = matriculas.split(" ");
-            letrasMatriculaEdu = matriculasCompletas[0].substring(4,7);
             matriculasModernas = 0;
             matriculasAntiguas = 0;
             for (int i = 1; i < matriculasCompletas.length-1; i++) {//empieza en 1 para que no guarde la matricula de Edu
                 //y  es hasta matriculaCompleta.length-1 para que no guarde la última
-                letrasMatriculas = matriculasCompletas[i].substring(4,7);
-                for (int j = 0; j < letrasMatriculas.length(); j++) { //recorre cada letra de la matricula
+                for (int j = 0; j < matriculasCompletas[i].substring(4,7).length(); j++) { //recorre cada letra de la matricula
                     //si la matricula es más pequeña es más antigua
-                    if(letrasMatriculaEdu.charAt(j)>letrasMatriculas.charAt(j)){
+                    if(matriculasCompletas[0].substring(4,7).charAt(j)>matriculasCompletas[i].substring(4,7).charAt(j)){
                         matriculasAntiguas++;
                         break;
                     }
-                    else if(letrasMatriculaEdu.charAt(j)<letrasMatriculas.charAt(j)){
+                    else if(matriculasCompletas[0].substring(4,7).charAt(j)<matriculasCompletas[i].substring(4,7).charAt(j)){
                         matriculasModernas++;
                         break;
                     }
