@@ -3,20 +3,6 @@ package desafios;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
-        1. número de personas
-        2. fecha de nacimiento de cada una
-            formato dia/mes/año(1600-2000) separadas por espacio
-            a) divide cada fecha por espacios
-            b) las introduce en un arraylist
-        3. comprueba si alguno de los cumple
-        está repetido
-            a) si está un boolean se pone true
-            b) no está un boolean se pone false
-         4. comprueba el numero de personas no sea 0
-         y vuelve al 2
-     */
-
 public class Desafio416 {
     Scanner sc = new Scanner(System.in);
 
@@ -27,9 +13,11 @@ public class Desafio416 {
 
     public ArrayList getBirthday(int numPersonas){
         ArrayList<String>listBirthday = new ArrayList<>();
+
         for (int i = 0; i < numPersonas; i++) {
-            listBirthday.add(sc.next());
+                listBirthday.add(sc.next());
         }
+
         return listBirthday;
     }
 
@@ -46,29 +34,34 @@ public class Desafio416 {
                     fecha2 = (String) listBirthday.get(j);
                     fecha1Separada = fecha1.split("/");
                     fecha2Separada = fecha2.split("/");
-                    if(fecha1Separada[0].equals(fecha2Separada[0]) && fecha1Separada[1].equals(fecha2Separada[1])){
+
+                    if(fecha1Separada[0].equals(fecha2Separada[0]) && fecha1Separada[1].equals(fecha2Separada[1]))
                         checkRepeated = true;
-                        break;
-                    }
+
                 }
             }
         }
         return checkRepeated;
     }
 
-    public void printCheck(boolean checkRepeated){
+    public void printCheck(boolean checkRepeated, int numPersonas){
         if(checkRepeated)
             System.out.println("SI");
-        else
+        else if(numPersonas!=0)
             System.out.println("NO");
     }
 
-    public void process(){
-        printCheck(compareDates(getBirthday(getNumberOfPeople())));
+    public void repetitiveProcess(){
+        int edad;
+
+        do{
+            edad = getNumberOfPeople();
+            printCheck(compareDates(getBirthday(edad)),edad);
+        }while (edad!=0);
     }
 
     public static void main(String[] args) {
         Desafio416 desafio = new Desafio416();
-        desafio.process();
+        desafio.repetitiveProcess();
     }
 }
