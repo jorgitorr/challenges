@@ -27,21 +27,31 @@ public class Desafio109 {
 
 
     public void setPartner(String category){
-        String equipo, resultado;
+        String partido[] = new String[4];
 
         if(category!="FIN"){
             do{
-                equipo = sc.next();
-                resultado = sc.next();
-
-                if(equipo!="FIN" || resultado!="FIN"){
-                    partners.put(equipo,resultado);
-                }else{
-                    setCategory();
+                for (int i = 0; i < partido.length; i++) {
+                    partido[i] = sc.next();
                 }
 
-            }while(equipo!="FIN" || resultado!="FIN");
+                if(Integer.parseInt(partido[1])>Integer.parseInt(partido[3])){
+                    partners.put(partido[1],partido[0]);//resultado,equipo
+                }else{
+                    partners.put(partido[3],partido[2]);
+                }
+            }while(partido[0] != "FIN");
         }
+    }
+
+    /**
+     * recorrer el mapa, el valor que más salga es el ganador
+     * @return veces que ha ganado un equipo
+     */
+    public int checkMatches(){
+
+
+        return 0;
     }
 
 
