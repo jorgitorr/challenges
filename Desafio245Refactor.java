@@ -33,11 +33,13 @@ public class Desafio245Refactor {
         actual = sc.nextInt();
         for (int i = 0; i < personas-1; i++) {
             siguiente = sc.nextInt();
-            if(siguiente<=actual){
-                dalton = false;
-                break;
+            if(actual>=1 || actual<=Math.pow(10,18) || siguiente>=1 || siguiente<=Math.pow(10,18)){
+                if(siguiente<=actual){
+                    dalton = false;
+                    break;
+                }
+                actual = siguiente;
             }
-            actual = siguiente;
         }
         return dalton;
     }
@@ -46,14 +48,14 @@ public class Desafio245Refactor {
         if(dalton)
             System.out.println("DALTON");
         else
-            System.out.println("DESCONOCIDO");
+            System.out.println("DESCONOCIDOS");
     }
 
 
 
     public void output(){
         personas = numPersonas();
-        while(personas!=0){
+        while(personas>1){
             salidaDalton(comparaAlturas(personas));
             sc.nextLine();
             personas = numPersonas();
