@@ -1,8 +1,6 @@
 package desafios;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Desafio109 {
     /**
@@ -10,53 +8,86 @@ public class Desafio109 {
      * 2. resultados anotados sobre ella if(nombre.length<16)
      *    a) nombre pareja que juega en casa, seguido del número de sets
      *    b) nombre pareja visitante, seguido del número de sets
+     * 3. si uno de la pareja ha ganado nos quedamos con ese
+     * 4. contar cuantas veces se repite cada nombre en la lista y quedarse con el nombre que más se repite
+     * 5. En el caso de que se repitan por igual se imprime directamente EMPATE, sino al punto 6
+     * 6. Si no existe el nombre lo introducimos en el mapa con un dos
+     * 7. Si ya existe el nombre sacamos la clave y le sumamos
      */
     Scanner sc;
-    Map<String,String>partners;
     String category;
 
     public Desafio109() {
         this.sc = new Scanner(System.in);
-        partners = new HashMap<>();
     }
 
+    /**
+     * ask for category
+     * @return category
+     */
     public String setCategory(){
         category = sc.nextLine();
         return category;
     }
 
-
-    public void setPartner(String category){
+    /**
+     *
+     * @param category
+     * @return partidos Ganados
+     */
+    public ArrayList<String> setPartner(String category){
         String partido[] = new String[4];
+        ArrayList<String>partidosGanados = new ArrayList<>();
 
-        if(category!="FIN"){
-            do{
-                for (int i = 0; i < partido.length; i++) {
-                    partido[i] = sc.next();
-                }
+        do{
+            for (int i = 0; i < partido.length; i++) {
+                partido[i] = sc.next();
 
-                if(Integer.parseInt(partido[1])>Integer.parseInt(partido[3])){
-                    partners.put(partido[1],partido[0]);//resultado,equipo
-                }else{
-                    partners.put(partido[3],partido[2]);
-                }
-            }while(partido[0] != "FIN");
-        }
+                if(partido[0].equals("FIN"))
+                    return partidosGanados;
+            }
+            if(Integer.parseInt(partido[1])>Integer.parseInt(partido[3])){
+                partidosGanados.add(partido[0]);
+            }else{
+                partidosGanados.add(partido[2]);
+            }
+        }while(partido[0] != "FIN");
+
+        return partidosGanados;
+    }
+
+
+    /**
+     *
+     * @return partidos ganados
+     */
+    public Map<Integer,String> addTeamswithPoints(ArrayList<String>partidosGanados){
+        Map<Integer,String> teamsCont = new TreeMap<>();
+
+
+
+        return teamsCont;
     }
 
     /**
-     * recorrer el mapa, el valor que más salga es el ganador
-     * @return veces que ha ganado un equipo
+     *
+     * @param teamsCont = Mapa que dice los equipos ordenados de menor a mayor cual es el resultado de cada uno
+     * @return
      */
-    public int checkMatches(){
+    public String chooseTeamWithMorePoints(Map<Integer, String>teamsCont){
+        Map<String, Integer>teamsPoints = new HashMap<>();
+        int cont = 0;
 
+        return "teamsPoints";
 
-        return 0;
     }
 
 
+
+
+
     public void output(){
-        setPartner(setCategory());
+        chooseTeamWithMorePoints(addTeamswithPoints(setPartner(setCategory())));
     }
 
 
