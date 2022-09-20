@@ -16,9 +16,14 @@ public class Desafio109 {
      */
     Scanner sc;
     String category;
+    int maxCont;
+    int cont;
+
 
     public Desafio109() {
         this.sc = new Scanner(System.in);
+        this.maxCont = 0;
+        this.cont = 2;
     }
 
     /**
@@ -58,36 +63,76 @@ public class Desafio109 {
 
 
     /**
-     *
+     * si el mapa no contiene el valor de los equipos ganados
+     * guarda en una variable el valor máx, para saber cual es la clave con el valor máx
+     * la constante cont se incrementa cada vez que los partidosGanados.get(i)==partidosGanados.get(j)
+     * ya que la j es una más adelantada de la i
+     * además si el mapa ya contiene el valor no vuelve a hacer las operaciones anteriores para así ahorrar.
      * @return partidos ganados
      */
     public Map<Integer,String> addTeamswithPoints(ArrayList<String>partidosGanados){
         Map<Integer,String> teamsCont = new TreeMap<>();
+        int cont = 0, j = 0;
+        for (int i = 0; i < partidosGanados.size()-1; i++) {
+            j = 0;
 
+            if(!teamsCont.containsValue(partidosGanados.get(i))){
+                if(maxCont<cont)
+                    maxCont = cont;
 
+                cont = 0;
+                do{
+                    j++;
+                    if(partidosGanados.get(i).equals(partidosGanados.get(j))){
+                        cont++;
+                    }
+                }while(j<partidosGanados.size()-1);
+                teamsCont.put(cont,partidosGanados.get(i));
+            }
+        }
 
         return teamsCont;
     }
 
     /**
-     *
-     * @param teamsCont = Mapa que dice los equipos ordenados de menor a mayor cual es el resultado de cada uno
+     * Si el valor ya está en el mapa lo que hace es agregar 2 al contador y lo remplaza por el que ya está
+     * si el valor no está lo que hace es agregarlo y agregar un 2
+     * @param teamsCont
      * @return
      */
-    public String chooseTeamWithMorePoints(Map<Integer, String>teamsCont){
-        Map<String, Integer>teamsPoints = new HashMap<>();
-        int cont = 0;
-
-        return "teamsPoints";
-
+    public Map<String, Integer> chooseTeamWithMorePoints(Map<Integer, String>teamsCont, int maxCont){
+        Map<String, Integer>teamsFinales = new HashMap<>();
+        if(teamsFinales.containsKey(teamsCont.containsValue(maxCont))){
+            cont+=2;
+            teamsFinales.replace(teamsCont.get(maxCont), cont);
+        }else{
+            teamsFinales.put(teamsCont.get(maxCont), 2);
+        }
+        return teamsFinales;
     }
 
-
-
-
+    /**
+     * coge el mapa del método anterior e imprime el último resultado si es que hay
+     * si no hay nada en la última posición sale empate
+     * @param teamsFinales
+     */
+    public void print(Map<String, Integer>teamsFinales){
+        for (int i = teamsFinales.size()-1; i <= teamsFinales.size()-1; i++) {
+            if(teamsFinales.containsValue(cont)){
+                System.out.println(teamsFinales);
+                cont = i;
+            }else{
+                System.out.println("EMPATE 0");
+            }
+        }
+    }
 
     public void output(){
-        chooseTeamWithMorePoints(addTeamswithPoints(setPartner(setCategory())));
+        String category = setCategory();
+        while(!category.equals("FIN")){
+            print(chooseTeamWithMorePoints(addTeamswithPoints(setPartner(category)),maxCont));
+            category = setCategory();
+        }
     }
 
 
