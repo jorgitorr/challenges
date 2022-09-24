@@ -1,4 +1,4 @@
-# Desarrollo de la lógica informática
+# Desafios/Challenges
 ***Está página se encontrará en español e inglés*** y tratará los programas y clases que puedes encontrar en la carpeta de arriba.
 ***This page will be in spanish and english*** and threat the theams of the programs and classes you'll find in the file above.
 > Desarrollo de problemas y desafios para mejorar mi uso de la programación en java.
