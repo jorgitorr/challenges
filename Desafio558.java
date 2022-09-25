@@ -20,19 +20,21 @@ public class Desafio558 {
      */
     Scanner sc;
     Map<String, String>groupOfWords;
+    ArrayList<String>lines;
 
-    public Desafio558(Scanner sc) {
+    public Desafio558() {
         this.sc = new Scanner(System.in);
         this.groupOfWords = new HashMap();
+        this.lines  = new ArrayList<>();
     }
 
     private int numIdentifications(){
         int num = sc.nextInt();
+        sc.nextLine();
         return num;
     }
 
     private ArrayList<String> askLines(int num){
-        ArrayList<String>lines = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             lines.add(sc.nextLine());
         }
@@ -40,22 +42,34 @@ public class Desafio558 {
     }
 
     private Map<String,String> saveLinesInGroups(ArrayList lines){
+        int contUpper = 0, contStorage = 0;
         for (int i = 0; i < lines.size(); i++) {
-            String word = groupOfWords.get(i).toString();
-            groupOfWords.put(word.toLowerCase(),word);
+            String word = lines.get(i).toString();
+            contUpper = 0;
+            for (int j = 0; j < word.length(); j++) {
+                if(word.charAt(j)==word.toUpperCase().charAt(j)){
+                    contUpper++;
+                }
+                //si el contador actual es mayor que el guardado entonces guardo la palabra, sino no
+                if(contUpper>contStorage){
+                    groupOfWords.put(word.toLowerCase(),word);
+                }
+                contStorage = contUpper;
+            }
         }
 
         return groupOfWords;
     }
 
     //comprobamos cual es la palabra con más mayúsculas del mapa
-    private int Capitalice(Map<String,String>groupOfWords){
-        for (int i = 0; i < groupOfWords.size(); i++) {
 
-        }
-        return 0;
+
+    public void baseOutput(){
+        saveLinesInGroups(askLines(numIdentifications()));
     }
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        Desafio558 desafio558 = new Desafio558();
+        desafio558.baseOutput();
     }
 }
