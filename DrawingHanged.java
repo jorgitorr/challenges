@@ -2,7 +2,7 @@ package desafios;
 
 public class DrawingHanged {
     protected void drawing(int cont){
-        String hangingDraw;
+        String hangingDraw = "";
 
         switch (cont){
             case 1:
@@ -118,8 +118,8 @@ public class DrawingHanged {
                                 "__|__";
                 System.out.println("Has muerto, vuelve a intentarlo en otro momento");
                 break;
-
-
+                
         }
+        System.out.println(hangingDraw);
     }
 }
