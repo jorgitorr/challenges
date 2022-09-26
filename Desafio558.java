@@ -19,13 +19,9 @@ public class Desafio558 {
     6. muestra la que tiene más mayúsculas (sin ser todas mayus)
      */
     Scanner sc;
-    Map<String, String>groupOfWords;
-    ArrayList<String>lines;
 
     public Desafio558() {
         this.sc = new Scanner(System.in);
-        this.groupOfWords = new HashMap();
-        this.lines  = new ArrayList<>();
     }
 
     private int numIdentifications(){
@@ -35,37 +31,50 @@ public class Desafio558 {
     }
 
     private ArrayList<String> askLines(int num){
+        ArrayList<String>lines = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             lines.add(sc.nextLine());
         }
         return lines;
     }
 
-    private Map<String,String> saveLinesInGroups(ArrayList lines){
-        int contUpper = 0, contStorage = 0;
+    /**
+     * compara si las palabras tienes más mayusculas
+     * @param lines
+     * @return
+     */
+    private Map<String,String> saveUpperInGroup(ArrayList lines){
+        Map<String, String>groupOfWords = new HashMap<>();
+        int contUpperActual = 0, contUpperAnterior = 0;
         for (int i = 0; i < lines.size(); i++) {
             String word = lines.get(i).toString();
-            contUpper = 0;
             for (int j = 0; j < word.length(); j++) {
-                if(word.charAt(j)==word.toUpperCase().charAt(j)){
-                    contUpper++;
+                if(word.toUpperCase().charAt(j)==word.charAt(j)){
+                    contUpperActual++;
                 }
-                //si el contador actual es mayor que el guardado entonces guardo la palabra, sino no
-                if(contUpper>contStorage){
+                if(contUpperActual>contUpperAnterior && !groupOfWords.containsValue(word)){
                     groupOfWords.put(word.toLowerCase(),word);
                 }
-                contStorage = contUpper;
             }
+            contUpperAnterior=contUpperActual;
         }
-
         return groupOfWords;
     }
 
-    //comprobamos cual es la palabra con más mayúsculas del mapa
+
+    private void printCamelCase(Map<String, String> groupOfWords){
+        for (int i = 0; i < groupOfWords.size(); i++) {
+            System.out.println(groupOfWords.values());
+        }
+    }
 
 
     public void baseOutput(){
-        saveLinesInGroups(askLines(numIdentifications()));
+        int num = numIdentifications();
+        while(num > 0){
+            printCamelCase(saveUpperInGroup(askLines(num)));
+            num = numIdentifications();
+        }
     }
 
     public static void main(String[] args) {
